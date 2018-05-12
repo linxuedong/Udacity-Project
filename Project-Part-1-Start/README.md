@@ -27,3 +27,17 @@ Check the page with the Chrome Dev Tools:
 * Try out emulation on different devices, portrait and landscape (click the icon next to the dimensions). What problems do you notice with each image? Which ones look worse?
 
 Check the page from Page Speed Insights -- lots more problems!
+
+
+## 流程
+
+- `npm install`
+
+- `grunt`
+
+- `python -m SimpleHTTPServer` 启动简单 HTTP 服务器
+
+
+## ImageMagick
+[ImageMagick download](https://www.imagemagick.org/script/download.php#macosx)
+`brew install ImageMagick`
