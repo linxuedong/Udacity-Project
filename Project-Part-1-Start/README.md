@@ -63,3 +63,7 @@ A code will appear in the Udacity Feedback when all Project Part 2 tests pass. P
 ## General Advice ##
 
 What else can you accomplish in markup? Try experimenting with font icons, unicode characters, and CSS effects to create natively responsive images.
+
+## 流程
+* [Unicode® character table](https://unicode-table.com/en/)
+* [Zocial | CSS3 Button Set](http://zocial.smcllns.com/)
