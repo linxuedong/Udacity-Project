@@ -473,6 +473,12 @@ footer a {
 }
 
 @media screen and (min-width: 700px) {
+  main,
+  .nav,
+  .header__inner {
+    max-width: 850px;
+  }
+
   .content {
     display: flex;
     flex-wrap: wrap;
@@ -493,15 +499,4 @@ footer a {
     width: 40%;
     order: 3;
   }
-}
-
-
-@media screen and (min-width: 850px) {
-
-  main,
-  .nav,
-  .header__inner {
-    max-width: 850px;
-  }
-
 }
