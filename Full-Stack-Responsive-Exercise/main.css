@@ -352,15 +352,15 @@ main {
   flex-wrap: wrap;
 }
 
-.snippet p {
+.snippet__description {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   order: 2;
-  line-height: 1em;
-  max-height: 3em;
+  line-height: 1.2em;
+  max-height: 3.6em;
   width: calc(100% - 30% - 48px);
 }
 
@@ -375,6 +375,7 @@ main {
 }
 
 .snippet__title {
+  padding: 10px 0;
   font-weight: 500;
   order: 0;
   width: 100%;
