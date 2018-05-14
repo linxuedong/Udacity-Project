@@ -350,6 +350,14 @@ main {
   margin: 24px 0;
 }
 
+.snippet p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .snippet__thumbnail {
   width: 100px;
   float: left;
