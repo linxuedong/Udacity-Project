@@ -348,6 +348,8 @@ main {
 .snippet {
   clear: both;
   margin: 24px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .snippet p {
@@ -356,16 +358,22 @@ main {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  order: 2;
+  line-height: 1em;
+  max-height: 3em;
+  width: calc(100% - 30% - 48px);
 }
 
 .snippet__thumbnail {
-  width: 100px;
-  float: left;
+  max-width: 30%;
+  order: 1;
   margin-right: 1em;
 }
 
 .snippet__title {
   font-weight: 500;
+  order: 0;
+  width: 100%;
 }
 
 .snippet__title a {
