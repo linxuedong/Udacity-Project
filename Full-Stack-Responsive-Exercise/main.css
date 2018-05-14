@@ -394,6 +394,11 @@ footer a {
   padding: 1.5em;
 }
 
+@media screen and (max-width: 450px) {
+  .snippet__thumbnail {
+    display: none;
+  }
+}
 
 @media screen and (min-width: 550px) {
 
