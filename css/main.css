@@ -1,0 +1,100 @@
+body {
+  font-size: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*
+ *
+ * Header
+ *
+ */
+
+.header {
+  width: 100%;
+  color: #2d3c49;
+  border-bottom: 2px solid #7d97ad;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header__logo {
+  width: 4rem;
+}
+
+.header__content {
+  width: calc(100% - 4rem);
+  text-align: right;
+}
+
+.header__title {
+  font-size: 3rem;
+  font-weight: lighter;
+  margin-bottom: 0rem;
+}
+
+.header__description {
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+/*
+ *
+ * Banner
+ *
+ */
+.banner {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.banner img {
+  width: 100%;
+}
+
+/*
+ *
+ * Works
+ *
+ */
+.works__title {
+  color: #7d97ad;
+}
+
+.works__content ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.work__item {
+  box-sizing: border-box;
+  display: inline-block;
+  width: calc((100% - 2em - 12px) / 3);
+  margin: 0;
+  padding: 0;
+}
+
+.work__item + .work__item {
+  margin-left: 1em;
+}
+
+.work__thumbnail {
+  width: 100%;
+}
+
+.work__title {
+  color: #2d3c49;
+  font-size: 1rem;
+  text-align: center;
+}
