@@ -175,7 +175,7 @@ main {
   position: relative;
   background-image: url("./images/hero.jpg");
   background-size: cover;
-  height: 300px;
+  min-height: 300px;
 }
 
 .hero article {
