@@ -20,7 +20,10 @@
   <main>
     <section class="content">
       <section class="banner">
-        <img src="images/banner.jpg" alt="Banner image">
+        <img src="images/banner-small.jpg"
+             srcset="images/banner-small.jpg 320w, images/banner-medium.jpg 500w, images/banner-large.jpg 960w"
+             sizes="(min-width: 500px) 100vw, 0"
+             alt="Banner image">
       </section>
 
       <section class="works">
@@ -29,19 +32,28 @@
           <ul>
             <li class="work__item">
               <a class="work_url" href="/Responsive-Image/">
-                <img class="work__thumbnail" src="images/sundown.jpg" alt="Photo of sundown">
+                <img class="work__thumbnail" src="images/sundown-small.jpg"
+                     srcset="images/sundown-small.jpg 320w, images/sundown-medium.jpg 500w"
+                     sizes="(min-width: 500px) 33vw, 100vw"
+                     alt="Photo of sundown">
                 <h3 class="work__title">Image blog</h3>
               </a>
             </li>
             <li class="work__item">
               <a class="work_url" href="/Full-Stack-Responsive-Exercise/">
-                <img class="work__thumbnail" src="images/beijin.jpg" alt="Photo of beijin">
+                <img class="work__thumbnail" src="images/beijin-small.jpg"
+                     srcset="images/beijin-small.jpg 320w, images/beijin-medium.jpg 500w"
+                     sizes="(min-width: 500px) 33vw, 100vw"
+                     alt="Photo of beijin">
                 <h3 class="work__title">Beijin Time</h3>
               </a>
             </li>
             <li class="work__item">
               <a class="work_url" href="#">
-                <img class="work__thumbnail" src="images/sky.jpg" alt="Photo of bule sky and white cloud">
+                <img class="work__thumbnail" src="images/sky-small.jpg"
+                     srcset="images/sky-small.jpg 320w, images/sky-medium.jpg 500w"
+                     sizes="(min-width: 500px) 33vw, 100vw"
+                     alt="Photo of bule sky and white cloud">
                 <h3 class="work__title">暂无</h3>
               </a>
             </li>
