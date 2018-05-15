@@ -77,8 +77,8 @@ ul {
 
 .header__title {
   font-weight: 300;
-  font-size: 2em;
-  margin: 0.5em 0.25em;
+  font-size: 1.7em;
+  margin: 0.2em 0.25em;
   display: inline-block;
   color: #212121;
 }
@@ -437,7 +437,7 @@ footer a {
   }
 
   .header__title {
-    font-size: 3.5em;
+    font-size: 3em;
   }
 
   .header__svg {
