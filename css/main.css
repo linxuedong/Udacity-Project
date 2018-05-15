@@ -21,6 +21,8 @@ a {
  */
 
 .header {
+  box-sizing: border-box;
+  padding: 0 1rem;
   width: 100%;
   color: #2d3c49;
   border-bottom: 2px solid #7d97ad;
@@ -64,6 +66,7 @@ a {
  */
 .works__title {
   color: #7d97ad;
+  padding: 0 1rem;
 }
 
 .work__thumbnail {
