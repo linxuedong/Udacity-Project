@@ -25,8 +25,20 @@ function loadData() {
     $body.append('<img src="' + streetViewUrl + '" alt="street view">')
 
     // NY time request
-
-
+    var nyUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    nyUrl += '?' + $.param({
+      'api-key': "72510bba800d4a77b45ea262a182225e",
+      'q': address
+    });
+    console.log(nyUrl);
+    $.ajax({
+      url:nyUrl,
+      method: 'GET',
+    }).done(function(result) {
+      console.log(result);
+    }).fail(function(err) {
+      throw err;
+    });
 
     return false;
 };
