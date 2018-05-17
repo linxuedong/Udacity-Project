@@ -16,11 +16,17 @@ function loadData() {
     // YOUR CODE GOES HERE!
 
     // Google street view request
-    var $street = $('#street');
-    var $city = $('#city');
-    url = 'https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' +
-        $street.val() + ', ' + $city.val();
-    $body.append('<img src="' + url + '" alt="street view">')
+    var streetStr = $('#street').val();
+    var cityStr = $('#city').val();
+    var address = streetStr + ', ' + cityStr;
+
+    var streetViewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=600x300&location='
+      + address ;
+    $body.append('<img src="' + streetViewUrl + '" alt="street view">')
+
+    // NY time request
+
+
 
     return false;
 };
