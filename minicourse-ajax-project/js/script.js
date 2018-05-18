@@ -30,20 +30,21 @@ function loadData() {
     var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     nytUrl += '?' + $.param({
         'api-key': "72510bba800d4a77b45ea262a182225e",
-        'q': address
+        'q': cityStr
     });
 
-    $.ajax({
-        url: nytUrl,
-        method: 'GET',
-    }).done(function(result) {
-        var items = [];
-        $.each(result.response.docs, function(key, val) {
-            $nytElem.append("<li id='" + key + "'>" + val.snippet + "</li>");
-        });
-    }).fail(function(err) {
-        throw err;
-    });
+    // $.ajax({
+    //     url: nytUrl,
+    //     method: 'GET',
+    // }).done(function(result) {
+    //     var items = [];
+    //     $.each(result.response.docs, function(key, val) {
+    //         $nytElem.append("<li id='" + key + "'>" + val.snippet + "</li>");
+    //     });
+    // }).fail(function(err) {
+    //     throw err;
+    // });
+
     // getJSON
     $.getJSON(nytUrl, function(data) {
         var items = data.response.docs
