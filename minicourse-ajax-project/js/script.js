@@ -22,7 +22,7 @@ function loadData() {
 
     var streetViewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' +
         address;
-    $body.append('<img src="' + streetViewUrl + '" alt="street view">')
+    $('body').attr({'style': 'background-image: url("' + streetViewUrl + '")'});
 
     // NY time request
     var nyUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
