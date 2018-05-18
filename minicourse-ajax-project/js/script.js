@@ -25,14 +25,14 @@ function loadData() {
     $('body').attr({'style': 'background-image: url("' + streetViewUrl + '")'});
 
     // NY time request
-    var nyUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    nyUrl += '?' + $.param({
+    var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    nytUrl += '?' + $.param({
         'api-key': "72510bba800d4a77b45ea262a182225e",
         'q': address
     });
-    console.log(nyUrl);
+
     $.ajax({
-        url: nyUrl,
+        url: nytUrl,
         method: 'GET',
     }).done(function(result) {
         var items = [];
