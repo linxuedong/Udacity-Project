@@ -59,6 +59,31 @@ function loadData() {
         $nytHeaderElem.text("New York Time Article Could Not Be Loaded")
     })
 
+
+    // Wikipedia API
+    var wikiUrl = 'https://zh.wikipedia.org/w/api.php'
+    $.ajax({
+        url: wikiUrl,
+        data: {
+            action: 'opensearch',
+            search: cityStr,
+            format: 'json'
+        },
+        method: 'GET',
+        dataType: 'jsonp',
+        success: function(result) {
+            for (var i = 0; i < result[1].length; i++) {
+                articleUrl = result[3][i];
+                articleTitle = result[1][i]
+                $wikiElem.append(
+                    '<li class="wikipedia__item">' +
+                    '  <a href="' + articleUrl + '" target="_blank">' + articleTitle + '</a>' +
+                    '</li>'
+                );
+            }
+        },
+    })
+
     return false;
 };
 
