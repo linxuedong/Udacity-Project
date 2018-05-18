@@ -49,13 +49,12 @@ function loadData() {
     $.getJSON(nytUrl, function(data) {
         var items = data.response.docs
         for (var i = 0; i < items.length; i++) {
-          var articleTitle = items[i].headline.main;
-          var articleLink = items[i].web_url;
-          console.log(articleTitle);
-          $nytElem.append('<li class="article__item"><a href="' + articleLink + '">' + articleTitle + '</a></li>')
+            var articleTitle = items[i].headline.main;
+            var articleLink = items[i].web_url;
+            $nytElem.append('<li class="article__item"><a href="' + articleLink + '">' + articleTitle + '</a></li>')
         }
         console.log(data);
-    }).error(function () {
+    }).error(function() {
         $nytHeaderElem.text("New York Time Article Could Not Be Loaded")
     })
 
