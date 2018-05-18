@@ -55,6 +55,8 @@ function loadData() {
           $nytElem.append('<li class="atricle__item"><a href="' + articleLink + '">' + articleTitle + '</a></li>')
         }
         console.log(data);
+    }).error(function () {
+        $nytHeaderElem.text("New York Time Article Could Not Be Loaded")
     })
 
     return false;
