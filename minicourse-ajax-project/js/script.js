@@ -52,7 +52,7 @@ function loadData() {
           var articleTitle = items[i].headline.main;
           var articleLink = items[i].web_url;
           console.log(articleTitle);
-          $nytElem.append('<li class="atricle__item"><a href="' + articleLink + '">' + articleTitle + '</a></li>')
+          $nytElem.append('<li class="article__item"><a href="' + articleLink + '">' + articleTitle + '</a></li>')
         }
         console.log(data);
     }).error(function () {
