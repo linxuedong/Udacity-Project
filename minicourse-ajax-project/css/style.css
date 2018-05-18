@@ -4,6 +4,14 @@ body {
   background-size: cover;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
 .bgimg {
     position:fixed;
     top: 0;
@@ -36,6 +44,18 @@ body {
 .article-list {
     margin: 0;
     padding: 0;
+}
+
+.article__item {
+    line-height: 2em; 
+}
+
+.article__item a{
+    color: #000;
+}
+
+.article__item a:hover {
+    text-decoration: underline;
 }
 
 .article {
