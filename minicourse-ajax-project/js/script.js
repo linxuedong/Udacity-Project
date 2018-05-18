@@ -22,7 +22,9 @@ function loadData() {
 
     var streetViewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' +
         address;
-    $('body').attr({'style': 'background-image: url("' + streetViewUrl + '")'});
+    $('body').attr({
+        'style': 'background-image: url("' + streetViewUrl + '")'
+    });
 
     // NY time request
     var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
@@ -37,7 +39,7 @@ function loadData() {
     }).done(function(result) {
         var items = [];
         $.each(result.response.docs, function(key, val) {
-          $nytElem.append( "<li id='" + key + "'>" + val.snippet + "</li>" );
+            $nytElem.append("<li id='" + key + "'>" + val.snippet + "</li>");
         });
     }).fail(function(err) {
         throw err;
