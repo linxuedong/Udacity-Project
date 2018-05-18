@@ -35,10 +35,10 @@ function loadData() {
         url: nyUrl,
         method: 'GET',
     }).done(function(result) {
-        console.log(result);
-        $.getJSON("ajax/test.json", function(data) {
-
-        })
+        var items = [];
+        $.each(result.response.docs, function(key, val) {
+          $nytElem.append( "<li id='" + key + "'>" + val.snippet + "</li>" );
+        });
     }).fail(function(err) {
         throw err;
     });
