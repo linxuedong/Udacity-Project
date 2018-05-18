@@ -60,6 +60,10 @@ function loadData() {
 
 
     // Wikipedia API
+    var wikiRequestTimeout = setTimeout(function() {
+      $wikiElem.text("Failed to get wikipedia respurces");
+    }, 8000);
+
     var wikiUrl = 'https://zh.wikipedia.org/w/api.php'
     $.ajax({
         url: wikiUrl,
@@ -80,6 +84,8 @@ function loadData() {
                     '</li>'
                 );
             }
+
+            clearTimeout(wikiRequestTimeout);
         },
     })
 
