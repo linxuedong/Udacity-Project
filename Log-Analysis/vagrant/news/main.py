@@ -41,17 +41,19 @@ def bad_request():
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT * \
-            FROM ( \
-                SELECT date(time), to_char(100.0*bad.b_view::numeric/count(*)::numeric, '999D99%') as percent \
-                FROM (SELECT date(time) AS b_date, count(*) AS b_view \
-                FROM log \
-                WHERE status NOT LIKE '200%' \
-                GROUP BY date(time)) AS bad JOIN log \
-                ON date(time) = bad.b_date \
-                GROUP BY date(time), bad.b_view \
-            ) AS result \
-            WHERE to_number(percent, '999D99%') > 1 \
-            ;")
+        FROM ( \
+            SELECT date(time), \
+            to_char(100.0*bad.b_view::numeric/count(*)::numeric, '999D99%')\
+             as percent \
+            FROM (SELECT date(time) AS b_date, count(*) AS b_view \
+            FROM log \
+            WHERE status NOT LIKE '200%' \
+            GROUP BY date(time)) AS bad JOIN log \
+            ON date(time) = bad.b_date \
+            GROUP BY date(time), bad.b_view \
+        ) AS result \
+        WHERE to_number(percent, '999D99%') > 1 \
+        ;")
     result = c.fetchone()
     db.close()
     return result
