@@ -11,7 +11,7 @@ def popular_article():
     c = db.cursor()
     c.execute("SELECT title, count(path) AS view \
                 FROM articles JOIN log \
-                ON path LIKE CONCAT('/article/', slug) \
+                ON path = CONCAT('/article/', slug) \
                 GROUP BY title \
                 ORDER BY view DESC \
                 LIMIT 3;")
@@ -27,7 +27,7 @@ def popular_author():
                 FROM authors JOIN ( \
                     SELECT author,  count(author) AS view \
                         FROM articles JOIN log \
-                        ON path LIKE CONCAT('/article/', slug)\
+                        ON path == CONCAT('/article/', slug)\
                         GROUP BY author \
                         ORDER BY view DESC \
                     ) AS popular_author \
