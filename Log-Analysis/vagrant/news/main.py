@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 import psycopg2
 
@@ -27,7 +27,7 @@ def popular_author():
                 FROM authors JOIN ( \
                     SELECT author,  count(author) AS view \
                         FROM articles JOIN log \
-                        ON path == CONCAT('/article/', slug)\
+                        ON path = CONCAT('/article/', slug)\
                         GROUP BY author \
                         ORDER BY view DESC \
                     ) AS popular_author \
@@ -57,3 +57,29 @@ def bad_request():
     result = c.fetchone()
     db.close()
     return result
+
+
+if __name__ == '__main__':
+    article_entry = "{} -- {} views \n"
+    article_list = ''.join([article_entry.format(title, views)
+                            for title, views in popular_article()])
+
+    author_entry = "{} -- {} views \n"
+    author_list = ''.join([author_entry.format(author, views)
+                           for author, views in popular_author()])
+
+    log_entyr = "{} -- {} errors \n"
+    log_info = log_entyr.format(bad_request()[0], bad_request()[1].strip())
+
+    with open('output.txt', 'w') as output:
+        q = '1. What are the most popular three articles of all time?'
+        print(q, file=output)
+        print(article_list, file=output)
+
+        q = '2. Who are the most popular article authors of all time?'
+        print(q, file=output)
+        print(author_list, file=output)
+
+        q = '3. On which days did more than 1% of requests lead to errors?'
+        print(q, file=output)
+        print(log_info, file=output)
