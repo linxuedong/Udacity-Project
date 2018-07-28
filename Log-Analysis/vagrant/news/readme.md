@@ -14,6 +14,10 @@ This will be a plain text file that is a copy of what your program printed out.
 ## Requirement
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - [VitrualBox](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
+- The project is based on python3, and you need to download the requirements
+```
+pip3 install psycopg2-binary
+```
 
 ### How to use vagrant
 ```
@@ -49,7 +53,7 @@ path |       ip       | method | status |          time          |   id
 ## Run
 ```
 cd /vagrant/news
-python main.py
+python3 main.py
 ```
 
 ## Third part resources
