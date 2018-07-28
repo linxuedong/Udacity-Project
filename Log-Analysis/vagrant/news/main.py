@@ -7,6 +7,9 @@ DBNAME = "news"
 
 
 def popular_article():
+    """
+    List the most popular three articles
+    """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT title, count(path) AS view \
@@ -21,6 +24,9 @@ def popular_article():
 
 
 def popular_author():
+    """
+    list the most popular article authors
+    """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT name, view \
@@ -38,6 +44,9 @@ def popular_author():
 
 
 def bad_request():
+    """
+    List which days did more than 1% of requests lead to errors
+    """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT * \
