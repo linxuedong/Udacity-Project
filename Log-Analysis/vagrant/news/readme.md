@@ -1,4 +1,5 @@
 # Log Analysis
+This project is homework of [Full-stack Web Developer](https://cn.udacity.com/course/full-stack-web-developer-nanodegree--nd004-cn) in Udacity.
 
 ## Resources
 
@@ -50,15 +51,14 @@ path |       ip       | method | status |          time          |   id
 /article/balloon-goons-doomed | 198.51.100.195 | GET    | 200 OK | 2016-07-01 07:00:23+00 | 1678927
 
 
+### Load the data
+[Download the news data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
+
+To load the data, `cd` into the `vagrant` directory and use the command `psql -d news -f newsdata.sql`.
+
+
 ## Run
 ```
 cd /vagrant/news
 python3 main.py
 ```
-
-## Third part resources
-[Download the news data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
-
-To load the data, `cd` into the `vagrant` directory and use the command `psql -d news -f newsdata.sql`.
-
-This project is homework of [Full-stack Web Developer](https://cn.udacity.com/course/full-stack-web-developer-nanodegree--nd004-cn) in Udacity.
