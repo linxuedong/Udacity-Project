@@ -8,7 +8,7 @@ DBNAME = "news"
 
 def popular_article():
     """
-    List the most popular three articles
+    Table of the most popular three articles
     """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
@@ -29,7 +29,7 @@ def popular_article():
 
 def popular_author():
     """
-    list the most popular article authors
+    Table of the most popular article authors
     """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
@@ -52,7 +52,7 @@ def popular_author():
 
 def bad_request():
     """
-    List which days did more than 1% of requests lead to errors
+    Table of which days did more than 1% of requests lead to errors
     """
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
