@@ -1,4 +1,5 @@
 # Log Analysis
+This project is homework of [Full-stack Web Developer](https://cn.udacity.com/course/full-stack-web-developer-nanodegree--nd004-cn) in Udacity.
 
 ## Resources
 
@@ -14,6 +15,10 @@ This will be a plain text file that is a copy of what your program printed out.
 ## Requirement
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - [VitrualBox](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
+- The project is based on python3, and you need to download the requirements
+```
+pip3 install psycopg2-binary
+```
 
 ### How to use vagrant
 ```
@@ -46,15 +51,14 @@ path |       ip       | method | status |          time          |   id
 /article/balloon-goons-doomed | 198.51.100.195 | GET    | 200 OK | 2016-07-01 07:00:23+00 | 1678927
 
 
-## Run
-```
-cd /vagrant/news
-python main.py
-```
-
-## Third part resources
+### Load the data
 [Download the news data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
 
 To load the data, `cd` into the `vagrant` directory and use the command `psql -d news -f newsdata.sql`.
 
-This project is homework of [Full-stack Web Developer](https://cn.udacity.com/course/full-stack-web-developer-nanodegree--nd004-cn) in Udacity.
+
+## Run
+```
+cd /vagrant/news
+python3 main.py
+```
