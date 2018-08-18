@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker
 
 from .models import Base
 
+from .models import Category, Item
+
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
@@ -18,10 +20,13 @@ Base.metadata.create_all(engine)
 @app.route('/')
 def index():
     # 展示 categories
+    categories = session.query(Category).all()
 
     # 展示 items
-    return render_template('index.html')
+    # TODO: order by
+    items = session.query(Item).order_by(Item.created_at).all()
 
+    return render_template('index.html', categories=categories, items=items)
 
 @app.route('/catalog/<catalog_name>/items')
 def item_list(catalog_name):
