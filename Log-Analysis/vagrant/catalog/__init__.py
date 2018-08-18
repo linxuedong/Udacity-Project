@@ -23,8 +23,7 @@ def index():
     categories = session.query(Category).all()
 
     # 展示 items
-    # TODO: order by
-    items = session.query(Item).order_by(Item.created_at).all()
+    items = session.query(Item).order_by(Item.created_at.desc()).all()
 
     return render_template('index.html', categories=categories, items=items)
 
@@ -32,10 +31,15 @@ def index():
 @app.route('/catalog/<category_name>/items')
 def item_list(category_name):
     # categories
+    categories = session.query(Category).all()
+    current_category = session.query(Category).filter(
+        Category.name == category_name).one()
 
     # 某个 categories 的 items
+    items = session.query(Item).filter(
+        Item.category == current_category).order_by(Item.created_at.desc()).all()
 
-    return '{} items'.format(category_name)
+    return render_template('index.html', categories=categories, items=items)
 
 
 @app.route('/catalog/<category_name>/<item_name>')
