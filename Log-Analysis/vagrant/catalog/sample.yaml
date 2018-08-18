@@ -1,0 +1,36 @@
+- Catalog:
+    - __key__: Soccer
+      name: Soccer
+
+    - __key__: Basketball
+      name: Basketball
+
+    - __key__: Baseball
+      name: Baseball
+
+    - __key__: Frisbee
+      name: Frisbee
+
+    - __key__: Snowboarding
+      name: Snowboarding
+
+    - __key__: Rock Climbing
+      name: Rock Climbing
+
+
+- Item:
+    - title: Soccer Cleats
+      catalog: Soccer
+      description: The shoes
+
+    - title: Jersey
+      catalog: Soccer
+      description: The shirt
+
+    - title: Bat
+      catalog: Baseball
+      description: The bat
+
+    - title: Snowboard
+      catalog: Snowboarding
+      description: Best of any terrain and conditions.
