@@ -44,11 +44,8 @@ def item_list(category_name):
 
 @app.route('/catalog/<category_name>/<item_name>')
 def item_detail(category_name, item_name):
-    # item name
-
-    # item descripe
-
-    return '{} items: {}'.format(category_name, item_name)
+    item = session.query(Item).filter(Item.title == item_name).one()
+    return render_template('item_detail.html', item=item)
 
 
 @app.route('/catalog/<category_name>/edit')
