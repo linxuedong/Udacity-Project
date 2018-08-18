@@ -1,0 +1,3 @@
+TESTING = True
+
+# DATABASE_URL =
