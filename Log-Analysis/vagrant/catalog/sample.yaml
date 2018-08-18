@@ -1,4 +1,4 @@
-- Catalog:
+- Category:
     - __key__: Soccer
       name: Soccer
 
@@ -20,17 +20,17 @@
 
 - Item:
     - title: Soccer Cleats
-      catalog: Soccer
+      category: Soccer
       description: The shoes
 
     - title: Jersey
-      catalog: Soccer
+      category: Soccer
       description: The shirt
 
     - title: Bat
-      catalog: Baseball
+      category: Baseball
       description: The bat
 
     - title: Snowboard
-      catalog: Snowboarding
+      category: Snowboarding
       description: Best of any terrain and conditions.

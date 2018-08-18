@@ -28,24 +28,25 @@ def index():
 
     return render_template('index.html', categories=categories, items=items)
 
-@app.route('/catalog/<catalog_name>/items')
-def item_list(catalog_name):
+
+@app.route('/catalog/<category_name>/items')
+def item_list(category_name):
     # categories
 
     # 某个 categories 的 items
 
-    return '{} items'.format(catalog_name)
+    return '{} items'.format(category_name)
 
 
-@app.route('/catalog/<catalog_name>/<item_name>')
-def item_detail(catalog_name, item_name):
+@app.route('/catalog/<category_name>/<item_name>')
+def item_detail(category_name, item_name):
     # item name
 
     # item descripe
 
-    return '{} items: {}'.format(catalog_name, item_name)
+    return '{} items: {}'.format(category_name, item_name)
 
 
-@app.route('/catalog/<catalog_name>/edit')
-def edit(catalog_name):
+@app.route('/catalog/<category_name>/edit')
+def edit(category_name):
     return 'edit item'

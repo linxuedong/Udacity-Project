@@ -6,8 +6,8 @@ from sqlalchemy.sql import func
 Base = declarative_base()
 
 
-class Catalog(Base):
-    __tablename__ = 'catalog'
+class Category(Base):
+    __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -19,6 +19,6 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     description = Column(String)
-    catalog_id = Column(Integer, ForeignKey('catalog.id'))
-    catalog = relationship(Catalog)
+    category_id = Column(Integer, ForeignKey('category.id'))
+    category = relationship(Category)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
