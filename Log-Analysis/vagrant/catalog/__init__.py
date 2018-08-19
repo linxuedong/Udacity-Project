@@ -72,3 +72,17 @@ def edit(item_name):
         return redirect(url_for('item_detail', category_name=item.category.name,
                                 item_name=title))
     return render_template('edit.html', categories=categories, item=item)
+
+
+@app.route('/catalog/<item_name>/delete', methods=['GET', 'POST'])
+def delete(item_name):
+    item_query = session.query(Item).filter(Item.title == item_name)
+    item = item_query.one()
+    if request.method == 'POST':
+        item_query.delete()
+        session.commit()
+        flash('You were successfully deleted.')
+
+        return redirect(url_for('index'))
+
+    return render_template('delete_item.html', item=item)
