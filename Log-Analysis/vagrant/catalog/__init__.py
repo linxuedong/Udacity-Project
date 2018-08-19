@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 from sqlalchemy import create_engine
 
@@ -48,6 +48,27 @@ def item_detail(category_name, item_name):
     return render_template('item_detail.html', item=item)
 
 
-@app.route('/catalog/<category_name>/edit')
-def edit(category_name):
-    return 'edit item'
+@app.route('/catalog/<item_name>/edit', methods=['GET', 'POST'])
+def edit(item_name):
+    categories = session.query(Category).all()
+    item_query = session.query(Item).filter(Item.title == item_name)
+    item = item_query.one()
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        category_id = str(request.form['category'])
+
+        new_item = {
+            'title': title,
+            'description': description,
+            'category_id': category_id
+        }
+
+        item_query.update(new_item)
+        session.commit()
+
+        flash('You were successfully edited.')
+
+        return redirect(url_for('item_detail', category_name=item.category.name,
+                                item_name=title))
+    return render_template('edit.html', categories=categories, item=item)
