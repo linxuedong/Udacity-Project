@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import session as login_session
 
 from sqlalchemy import create_engine
 
@@ -8,6 +9,9 @@ from .models import Base
 
 from .models import Category, Item
 
+import jwt
+import datetime
+
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
@@ -15,6 +19,16 @@ engine = create_engine('postgresql://vagrant@localhost/catalog')
 Session = sessionmaker(bind=engine)
 session = Session()
 Base.metadata.create_all(engine)
+
+
+@app.route('/login')
+def login():
+    exp = datetime.datetime.utcnow() + datetime.timedelta(seconds=10)
+    permission = {'can_add': True, 'can_edit': True,
+                  'can_delete:': True, 'exp': exp}
+    token = jwt.encode(permission, 'secret', algorithm='HS256')
+    login_session['token'] = token
+    return str(token) + '\n' + str(exp)
 
 
 @app.route('/')

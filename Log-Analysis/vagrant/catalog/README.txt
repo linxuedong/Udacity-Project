@@ -22,6 +22,7 @@ python -m sqla_yaml_fixtures --db-url postgresql://vagrant@localhost/catalog --d
 
 ## Run Application
 ```
+cd /vagrant 
 export FLASK_APP=catalog
 export FLASK_ENV=development
 
