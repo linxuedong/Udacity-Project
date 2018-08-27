@@ -1,16 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 from flask import session as login_session
-
-from sqlalchemy import create_engine
-
-from sqlalchemy.orm import sessionmaker
-
-from .models import Base
-
-from .models import Category, Item
 
 import jwt
 import datetime
+import json
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from .models import Base
+from .models import Category, Item
+
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -20,15 +22,18 @@ Session = sessionmaker(bind=engine)
 session = Session()
 Base.metadata.create_all(engine)
 
+CLIENT_ID = json.loads(
+    open('catalog/client_secret.json', 'r').read())['web']['client_id']
+
 
 @app.route('/login')
 def login():
-    exp = datetime.datetime.utcnow() + datetime.timedelta(seconds=10)
+    exp = datetime.datetime.utcnow() + datetime.timedelta(seconds=30)
     permission = {'can_add': True, 'can_edit': True,
                   'can_delete:': True, 'exp': exp}
-    token = jwt.encode(permission, 'secret', algorithm='HS256')
-    login_session['token'] = token
-    return str(token) + '\n' + str(exp)
+    state = jwt.encode(permission, 'secret', algorithm='HS256').decode('utf-8')
+    login_session['state'] = state
+    return render_template('login.html', STATE=state, exp=exp)
 
 
 @app.route('/')
