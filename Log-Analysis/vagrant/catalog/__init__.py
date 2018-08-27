@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, abort
 from flask import session as login_session
 
 import jwt
@@ -104,7 +104,7 @@ def get_user_info(user_id):
 
 def get_user_id(email):
     try:
-        user = session.query(User).filter_by(email=email)
+        user = session.query(User).filter_by(email=email).one()
         return user.id
     except:
         return None
@@ -138,7 +138,15 @@ def item_list(category_name):
 @app.route('/catalog/<category_name>/<item_name>')
 def item_detail(category_name, item_name):
     item = session.query(Item).filter(Item.title == item_name).one()
-    return render_template('item_detail.html', item=item)
+    operate = True
+    if item.user.id != login_session['user_id']:
+        operate = False
+    return render_template('item_detail.html', item=item, operate=operate)
+
+
+def auth_author(item):
+    if item.user.id != login_session['user_id']:
+        abort(404)
 
 
 @app.route('/catalog/<item_name>/edit', methods=['GET', 'POST'])
@@ -146,6 +154,9 @@ def edit(item_name):
     categories = session.query(Category).all()
     item_query = session.query(Item).filter(Item.title == item_name)
     item = item_query.one()
+
+    auth_author(item)
+
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -171,6 +182,7 @@ def edit(item_name):
 def delete(item_name):
     item_query = session.query(Item).filter(Item.title == item_name)
     item = item_query.one()
+    auth_author(item)
     if request.method == 'POST':
         item_query.delete()
         session.commit()
