@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from .models import Base
-from .models import Category, Item
+from .models import Category, Item, User
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -73,11 +73,41 @@ def gconnect():
     login_session['email'] = idinfo['email']
     login_session['picture'] = idinfo['picture']
 
+    user_id = get_user_id(login_session['email'])
+    if not user_id:
+        user_id = create_user(login_session)
+    login_session['user_id'] = user_id
+
+    flash("you are now logged in as %s" % login_session['username'])
 
     permission = jwt.decode(request.args.get(
         'state'), 'secret', algorithms=['HS256'])
 
     return login_session['username']
+
+
+def create_user(login_session):
+    name = login_session['username']
+    email = login_session['email']
+    picture = login_session['picture']
+    new_user = User(name=name, email=email, picture=picture)
+    session.add(new_user)
+    session.commit()
+    user = session.query(User).filter_by(name=name).one()
+    return user.id
+
+
+def get_user_info(user_id):
+    user = session.query(User).get(user_id)
+    return user
+
+
+def get_user_id(email):
+    try:
+        user = session.query(User).filter_by(email=email)
+        return user.id
+    except:
+        return None
 
 
 @app.route('/')
