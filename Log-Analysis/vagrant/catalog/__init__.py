@@ -36,6 +36,17 @@ def login():
     return render_template('login.html', STATE=state, exp=exp)
 
 
+@app.route('/logout')
+def logout():
+    login_session['username'] = None
+    login_session['picture'] = None
+    login_session['email'] = None
+    login_session['state'] = None
+    login_session['user_id'] = None
+    flash('Logout successfully!')
+    return render_template('logout.html')
+
+
 @app.route('/gconnect', methods=['GET', 'POST'])
 def gconnect():
     # Validate state token

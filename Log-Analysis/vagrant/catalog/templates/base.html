@@ -21,7 +21,12 @@
             <div class="container">
                 <a class="navbar-brand" href="/"> Catalog </a>
                 <ul class="nav justify-content-end">
-                    <button type="button" class="btn btn-warning"><a href="{{ url_for('login' )}}">Login</a></button>
+                    {% if session['username'] %}
+                        <button type="button" class="btn btn-warning"><a href="{{ url_for('logout' )}}">Logout</a></button>
+                    {% else %}
+                        <button type="button" class="btn btn-warning"><a href="{{ url_for('login' )}}">Login</a></button>
+                    {% endif %}
+
                 </ul>
 
             </div>
