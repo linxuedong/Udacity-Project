@@ -36,6 +36,50 @@ def login():
     return render_template('login.html', STATE=state, exp=exp)
 
 
+@app.route('/gconnect', methods=['GET', 'POST'])
+def gconnect():
+    # Validate state token
+
+    if request.args.get('state') != login_session['state']:
+        response = make_response(json.dumps('Invalid state parameter.'), 401)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    # Obtain authorization code
+    token = request.data
+
+    try:
+        # Specify the CLIENT_ID of the app that accesses the backend:
+        idinfo = id_token.verify_oauth2_token(
+            token, requests.Request(), CLIENT_ID)
+
+        # Or, if multiple clients access the backend server:
+        # idinfo = id_token.verify_oauth2_token(token, requests.Request())
+        # if idinfo['aud'] not in [CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]:
+        #     raise ValueError('Could not verify audience.')
+
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise ValueError('Wrong issuer.')
+
+        # If auth request is from a G Suite domain:
+        # if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+        #     raise ValueError('Wrong hosted domain.')
+
+        # ID token is valid. Get the user's Google Account ID from the decoded token.
+        userid = idinfo['sub']
+    except ValueError:
+        # Invalid token
+        pass
+    login_session['username'] = idinfo['name']
+    login_session['email'] = idinfo['email']
+    login_session['picture'] = idinfo['picture']
+
+
+    permission = jwt.decode(request.args.get(
+        'state'), 'secret', algorithms=['HS256'])
+
+    return login_session['username']
+
+
 @app.route('/')
 def index():
     # 展示 categories
