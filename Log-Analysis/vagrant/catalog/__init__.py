@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response, abort
+from flask import (Flask, render_template, request, redirect,
+                   url_for, flash, make_response, abort)
 from flask import session as login_session
 
 import jwt
@@ -7,7 +8,7 @@ import json
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy.orm.exc import NoResultFound
 from .models import Base
 from .models import Category, Item, User
 
@@ -68,18 +69,20 @@ def gconnect():
         # if idinfo['aud'] not in [CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]:
         #     raise ValueError('Could not verify audience.')
 
-        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        google_api = 'https://accounts.google.com'
+        if idinfo['iss'] not in ['accounts.google.com', google_api]:
             raise ValueError('Wrong issuer.')
 
         # If auth request is from a G Suite domain:
         # if idinfo['hd'] != GSUITE_DOMAIN_NAME:
         #     raise ValueError('Wrong hosted domain.')
 
-        # ID token is valid. Get the user's Google Account ID from the decoded token.
-        userid = idinfo['sub']
+        # ID token is valid. Get the user's Google Account ID from the decoded
+        # token.
+        # userid = idinfo['sub']
     except ValueError:
         # Invalid token
-        pass
+        raise ValueError('Invalid token.')
     login_session['username'] = idinfo['name']
     login_session['email'] = idinfo['email']
     login_session['picture'] = idinfo['picture']
@@ -90,9 +93,6 @@ def gconnect():
     login_session['user_id'] = user_id
 
     flash("you are now logged in as %s" % login_session['username'])
-
-    permission = jwt.decode(request.args.get(
-        'state'), 'secret', algorithms=['HS256'])
 
     return login_session['username']
 
@@ -117,7 +117,7 @@ def get_user_id(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
+    except NoResultFound:
         return None
 
 
@@ -141,7 +141,8 @@ def item_list(category_name):
 
     # 某个 categories 的 items
     items = session.query(Item).filter(
-        Item.category == current_category).order_by(Item.created_at.desc()).all()
+        Item.category == current_category
+    ).order_by(Item.created_at.desc()).all()
 
     return render_template('index.html', categories=categories, items=items)
 
@@ -184,8 +185,8 @@ def edit(item_name):
 
         flash('You were successfully edited.')
 
-        return redirect(url_for('item_detail', category_name=item.category.name,
-                                item_name=title))
+        return redirect(url_for(
+            'item_detail', category_name=item.category.name, item_name=title))
     return render_template('edit.html', categories=categories, item=item)
 
 
